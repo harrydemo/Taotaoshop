@@ -149,8 +149,9 @@ Ajax请求。
 Total：查询结果的总记录数
 Rows：集合，包含显示的所有数据。其中集合中每个元素的key应该和dategrid的field对应。
 Easyui中datagrid控件要求的数据格式为：
+```
 {total:”2”,rows:[{“id”:”1”,”name”,”张三”},{“id”:”2”,”name”,”李四”}]}
- 
+```
 
 4.3.2	Dao层
 可以使用逆向工程生成的代码
@@ -324,7 +325,7 @@ public class ItemCatController {
 	}
 	
 }
-``` 
+```
 
 6	图片上传
 6.1	图片上传分析
