@@ -1,34 +1,34 @@
-淘淘商城第二天
-1	第一天内容：
-1、电商行业的了解。
-2、淘淘商城项目介绍
-3、后台系统的搭建。
+#v淘淘商城第二天
+## 1	第一天内容：
+1. 电商行业的了解。
+2. 淘淘商城项目介绍
+3. 后台系统的搭建。
 a)	使用maven管理
 b)	聚合工程
 c)	创建maven模块，根据层级
-4、svn使用
+4. svn使用
 a)	工程上传
 b)	下载工程（需要转换成maven工程）
-5、Ssm框架的整合
+5. Ssm框架的整合
 
-2	课程计划
-1、商品列表查询工程
+## 2	课程计划
+1. 商品列表查询工程
 a)	Easyui
 b)	分页处理，分页插件
-2、商品的添加
+2. 商品的添加
 a)	商品类目选择-easyui异步tree控件的使用
 b)	图片上传（图片服务器开头，nginx）
 c)	富文本编辑器使用
 d)	添加的实现
 
-3	展示首页
+## 3	展示首页
 创建一个controller，做一个页面跳转。展示index.jsp的内容。
 
-3.1	分析
+### 3.1	分析
 请求的url：/
 返回的结果：返回一个string类型，是一个逻辑视图。
 
-3.2	代码实现
+### 3.2	代码实现
 ```java
 @Controller
 public class PageController {
@@ -39,19 +39,19 @@ public class PageController {
 	}
 }
 ```
-3.3	静态资源映射
+### 3.3	静态资源映射
  
 
-4	商品列表展示
-4.1	分析
+## 4	商品列表展示
+### 4.1	分析
 打开商品列表页面，应该创建一个Handler接收请求，跳转到对应的页面。请求和页面的名称一致。可以统一处理。
  
 查询的表：tb_item
 单表查询sql：SELECT * from tb_item LIMIT 0,10
 需要实现分页，使用逆向工程，可以使用mybatis的分页插件。
 
-4.2	分页插件
-4.2.1	原理
+### 4.2	分页插件
+#### 4.2.1	原理
 
 
 
@@ -79,7 +79,7 @@ public class PageController {
 
 
 
-4.2.2	使用方法
+#### 4.2.2	使用方法
 插件叫做PageHelper如果你也在用Mybatis，建议尝试该分页插件，这个一定是最方便使用的分页插件。
 该插件目前支持Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库分页。
 使用方法：
@@ -87,11 +87,11 @@ public class PageController {
 第二步：在sql语句执行之前，添加一个PageHelper.startPage(page,rows);
 第三步：取分页结果。创建一个PageInfo对象需要参数，查询结果返回的list。从PageInfo对象中取分页结果。
 
-4.2.2.1	添加jar包到工程中
+##### 4.2.2.1	添加jar包到工程中
  
  
 
-4.2.2.2	修改SqlMapConfig.xml
+##### 4.2.2.2	修改SqlMapConfig.xml
 ```
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
@@ -109,7 +109,7 @@ public class PageController {
 
 </configuration>
 ```
-4.2.2.3	代码测试
+##### 4.2.2.3	代码测试
 ```java
 public class TestPageHelper {
 	
@@ -136,8 +136,8 @@ public class TestPageHelper {
 
 }
 ```
-4.3	展示商品列表
-4.3.1	页面分析
+### 4.3	展示商品列表
+#### 4.3.1	页面分析
 请求的url：
  
 Ajax请求。
@@ -153,10 +153,10 @@ Easyui中datagrid控件要求的数据格式为：
 {total:”2”,rows:[{“id”:”1”,”name”,”张三”},{“id”:”2”,”name”,”李四”}]}
 ```
 
-4.3.2	Dao层
+#### 4.3.2	Dao层
 可以使用逆向工程生成的代码
 
-4.3.3	Service层
+#### 4.3.3	Service层
 参数：page（显示的页码）、rows（每页显示的记录数）
 返回值：创建一个pojo表示返回值。应该包含total、rows两个属性。
 应该放到taotao-common工程中，和其他系统共用。
@@ -197,7 +197,7 @@ public class EasyUIDataGridResult {
 		return result;
 	}
 ```
-4.3.4	Controller
+#### 4.3.4	Controller
 接收两个参数：page、rows
 调用Service查询商品列表。
 返回：EasyUIDataGridResult（json数据），需要使用@ResponseBody
@@ -209,8 +209,8 @@ public class EasyUIDataGridResult {
 		return result;
 	}
 ```
-5	添加商品-类目选择
-5.1	分析
+## 5	添加商品-类目选择
+### 5.1	分析
 商品类目使用的表：tb_item_cat
 初始化类目选择：
  
@@ -235,11 +235,11 @@ Easyui的异步tree控件：
 ```
 如果当前节点为父节点，state应为“closed”、如果是叶子节点“open”
 
-5.2	Dao层
+### 5.2	Dao层
 查询tb_item_cat表，根据id查询商品分类列表。可以使用逆向工程。
 
-5.3	Service层
-5.3.1	分析
+### 5.3	Service层
+#### 5.3.1	分析
 接收参数parentId，根据parentId查询分类列表。返回pojo列表。
 Pojo应该包含三个属性：
 id、text、state
@@ -327,9 +327,9 @@ public class ItemCatController {
 }
 ```
 
-6	图片上传
-6.1	图片上传分析
-6.1.1	传统方式
+## 6	图片上传
+### 6.1	图片上传分析
+#### 6.1.1	传统方式
 并发量小、用户少：
 
 
@@ -364,7 +364,7 @@ public class ItemCatController {
 
 	
 
-6.1.2	互联网项目
+#### 6.1.2	互联网项目
 解决方案，新建一个图片服务器
 
 
@@ -400,44 +400,46 @@ public class ItemCatController {
 专门保存图片，不管是哪个服务器接收到图片，都把图片上传到图片服务器。
 图片服务器上需要安装一个http服务器，可以使用tomcat、apache、nginx
 
-6.2	Nginx
-6.2.1	什么是nginx
+### 6.2	Nginx
+#### 6.2.1	什么是nginx
 是一个使用c语言开发的高性能的http服务器及反向代理服务器。
 Nginx是一款高性能的http 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器。由俄罗斯的程序设计师Igor Sysoev所开发，官方测试nginx能够支支撑5万并发链接，并且cpu、内存等资源消耗却非常低，运行非常稳定。
 
-6.2.2	Nginx的应用场景
-1、http服务器。Nginx是一个http服务可以独立提供http服务。可以做网页静态服务器。
-2、虚拟主机。可以实现在一台服务器虚拟出多个网站。例如个人网站使用的虚拟主机。
-3、反向代理，负载均衡。当网站的访问量达到一定程度后，单台服务器不能满足用户的请求时，需要用多台服务器集群可以使用nginx做反向代理。并且多台服务器可以平均分担负载，不会因为某台服务器负载高宕机而某台服务器闲置的情况。
+#### 6.2.2	Nginx的应用场景
+1. http服务器。Nginx是一个http服务可以独立提供http服务。可以做网页静态服务器。
+2. 虚拟主机。可以实现在一台服务器虚拟出多个网站。例如个人网站使用的虚拟主机。
+3. 反向代理，负载均衡。当网站的访问量达到一定程度后，单台服务器不能满足用户的请求时，需要用多台服务器集群可以使用nginx做反向代理。并且多台服务器可以平均分担负载，不会因为某台服务器负载高宕机而某台服务器闲置的情况。
 
-6.2.3	Nginx的安装
+#### 6.2.3	Nginx的安装
 Nginx一般推荐安装到linux系统，而且要安装c语言的编译环境gcc。
 
-6.2.3.1	下载：
+##### 6.2.3.1	下载：
 进入http://nginx.org/en/download.html 下载nginx1.8.0版本（当前最新稳定版本）。
 
  
 
-6.2.3.2	先安装nginx依赖的包：
+##### 6.2.3.2	先安装nginx依赖的包：
 nginx是C语言开发，建议在linux上运行，本教程使用Centos6.5作为安装环境。
-	gcc
+-	gcc
 	安装nginx需要先将官网下载的源码进行编译，编译依赖gcc环境，如果没有gcc环境，需要安装gcc：yum install gcc-c++ 
-	PCRE
+-	PCRE
 	PCRE(Perl Compatible Regular Expressions)是一个Perl库，包括 perl 兼容的正则表达式库。nginx的http模块使用pcre来解析正则表达式，所以需要在linux上安装pcre库。
 yum install -y pcre pcre-devel
 注：pcre-devel是使用pcre开发的一个二次开发库。nginx也需要此库。
-	zlib
+-	zlib
 	zlib库提供了很多种压缩和解压缩的方式，nginx使用zlib对http包的内容进行gzip，所以需要在linux上安装zlib库。
 yum install -y zlib zlib-devel
 
-	openssl
+-	openssl
 	OpenSSL 是一个强大的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及SSL协议，并提供丰富的应用程序供测试或其它目的使用。
 	nginx不仅支持http协议，还支持https（即在ssl协议上传输http），所以需要在linux安装openssl库。
 yum install -y openssl openssl-devel
 
 ##### 6.2.3.3	安装步骤
 第一步：把nginx的源码上传到linux系统
+
 第二步：把压缩包解压缩。
+
 第三步：进行configure。
 ```
 ./configure \
@@ -454,7 +456,9 @@ yum install -y openssl openssl-devel
 --http-scgi-temp-path=/var/temp/nginx/scgi
 ```
 注意：上边将临时文件目录指定为/var/temp/nginx，需要在/var下创建temp及nginx目录
+
 第四步：make
+
 第五步：make install
 
 #### 6.2.4	Nginx的启动、停止
